@@ -1,0 +1,15 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: whitesmoke;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
