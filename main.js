@@ -32,7 +32,7 @@ class Player {
 
 class Projectile {
   constructor(x, y, radius, color, velocity) {
-    this.x = x 
+    this.x = x
     this.y = y
     this.radius = radius
     this.color = color
@@ -50,7 +50,7 @@ class Projectile {
     this.draw()
     this.x = this.x + this.velocity.x
     this.y = this.y + this.velocity.y
-    
+
   }
 }
 
@@ -89,26 +89,66 @@ addEventListener('click', (event) => {
   const radius = 5
   const color = 'red'
   const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
-  const velocity = {x: Math.cos(angle), y: Math.sin(angle)}
+  const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
 
   const projectile = new Projectile(x, y, radius, color, velocity)
   projectiles.push(projectile)
 })
 
-function generateEnemy() {
-  setInterval(() => {
-    console.log('go');
-  }, 1000)
+function generateEnemies() {
+  // setInterval(() => {
+  const radius = 30
+  let x
+  let y
+
+  if (Math.random() < 0.5) {
+    x = Math.random() < 0.5 ? canvas.width + radius : 0 - radius
+    y = Math.random() * canvas.height
+  } else {
+    x = Math.random() * canvas.width
+    y = Math.random() < 0.5 ? canvas.height + radius : 0 - radius
+  }
+
+  // const y = Math.random() < 0.5 ? Math.random() * canvas.height : 0 - radius
+  const color = 'green'
+  const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x)
+  const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
+
+  enemies.push(new Enemy(x, y, radius, color, velocity))
+  // }, 1000)
 }
 
+let animationId
+
 function animate() {
-  requestAnimationFrame(animate)
+  animationId = requestAnimationFrame(animate)
   ctx.clearRect(0, 0, canvas.width, canvas.height)
   player.draw()
+  enemies.forEach((enemy) => {
+    enemy.update()
+    // End Game
+    const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y)
+    if (dist - enemy.radius - player.radius < 1) {
+      cancelAnimationFrame(animationId)
+    }
+
+    projectiles.forEach((projectile) => {
+      const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
+      if (dist - enemy.radius - projectile.radius < 1) {
+
+      }
+    })
+
+  })
   projectiles.forEach((projectile) => {
-  projectile.update()
+    projectile.update()
   })
 }
 
 animate()
-generateEnemy()
+generateEnemies()
+
+// To the next Session
+// [1, 2, 3, 4].forEach((item, index) => {
+//   console.log(index);
+// })
