@@ -4,8 +4,8 @@
 // 4- detect collision on enemy / projectile hit [DONE] --
 // 5- detect collision on enemy / player hit [DONE] --
 // 6- remove of screen projectile [DONE] --
-// 7- colorize game [DONE]
-// 8- shrink enemies on hit
+// 7- colorize game [DONE] --
+// 8- shrink enemies on hit --
 // 9- create projectile explosion on hit
 // 10- add score
 // 11- add game over UI

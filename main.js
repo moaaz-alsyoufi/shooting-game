@@ -90,11 +90,11 @@ addEventListener('click', (event) => {
   const radius = 5
   const color = 'white'
   const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
-  const velocity = { x: Math.cos(angle) * 4, y: Math.sin(angle) * 4}
+  const velocity = { x: Math.cos(angle) * 5, y: Math.sin(angle) * 5}
 
   const projectile = new Projectile(x, y, radius, color, velocity)
   projectiles.push(projectile)
-  // TODO::  sound effect
+  // TODO::  sound effect stops when player lose
   if (animationId) {
     projectileSound.currentTime = 0
     projectileSound.play()
@@ -144,13 +144,19 @@ function animate() {
     // const r = [1, 2, 3, 4]
     // r.splice(0, 1)
     // console.log(r)
+
+    //projectile touch enemy
     projectiles.forEach((projectile, projectileIndex) => {
       const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
       if (dist - enemy.radius - projectile.radius < 1) {
-        setTimeout(() => {
-          enemies.splice(enemyIndex, 1)
-          projectiles.splice(projectileIndex, 1)
-        }, 0)
+        if (enemy.radius - 10 > 10) {
+          enemy.radius = enemy.radius / 2
+        } else {
+          setTimeout(() => {
+            enemies.splice(enemyIndex, 1)
+            projectiles.splice(projectileIndex, 1)
+          }, 0)
+        }
       }
     })
 
