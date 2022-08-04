@@ -150,7 +150,9 @@ function animate() {
       if (dist - enemy.radius - projectile.radius < 1) {
         if (enemy.radius - 10 > 5) {
           enemy.radius -= 10
-          projectiles.splice(projectileIndex, 1)
+          setTimeout(() => {
+            projectiles.splice(projectileIndex, 1)
+          }, 0)
         } else {
           setTimeout(() => {
             enemies.splice(enemyIndex, 1)
