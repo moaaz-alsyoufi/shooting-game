@@ -85,11 +85,11 @@ const projectiles = []
 const enemies = []
 
 addEventListener('click', (event) => {
-  const x = canvas.width / 2
-  const y = canvas.height / 2
+  const x = player.x
+  const y = player.y
   const radius = 5
-  const color = 'white'
-  const angle = Math.atan2(event.clientY - canvas.height / 2, event.clientX - canvas.width / 2)
+  const color = player.color
+  const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
   const velocity = { x: Math.cos(angle) * 5, y: Math.sin(angle) * 5}
 
   const projectile = new Projectile(x, y, radius, color, velocity)
@@ -99,7 +99,6 @@ addEventListener('click', (event) => {
     projectileSound.currentTime = 0
     projectileSound.play()
   }
-  console.log(animationId);
 })
 
 function generateEnemies() {
