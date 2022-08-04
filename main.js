@@ -79,10 +79,34 @@ class Enemy {
   }
 }
 
-const player = new Player(canvas.width / 2, canvas.height / 2, 10, 'white')
+class Particle {
+  constructor(x, y, radius, color, velocity) {
+    this.x = x
+    this.y = y
+    this.radius = radius
+    this.color = color
+    this.velocity = velocity
+  }
 
+  draw() {
+    ctx.beginPath()
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+    ctx.fillStyle = this.color
+    ctx.fill()
+  }
+
+  update() {
+    this.draw()
+    this.x = this.x + this.velocity.x
+    this.y = this.y + this.velocity.y
+
+  }
+}
+
+const player = new Player(canvas.width / 2, canvas.height / 2, 10, 'white')
 const projectiles = []
 const enemies = []
+const particles = []
 
 addEventListener('click', (event) => {
   const x = player.x
@@ -131,6 +155,9 @@ function animate() {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   player.draw()
+  particles.forEach((p, particleIndex) => {
+    p.update()
+  })
   enemies.forEach((enemy, enemyIndex) => {
     enemy.update()
     // End Game
@@ -148,8 +175,11 @@ function animate() {
     projectiles.forEach((projectile, projectileIndex) => {
       const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
       if (dist - enemy.radius - projectile.radius < 1) {
+        for (let i = 0; i < 8; i++) {
+          particles.push(new Particle(projectile.x, projectile.y, 3, enemy.color, {x: Math.random() - 0.5, y: Math.random() - 0.5}))
+        }
         if (enemy.radius - 10 > 5) {
-          enemy.radius -= 10
+          gsap.to(enemy, {radius: enemy.radius - 10 })
           setTimeout(() => {
             projectiles.splice(projectileIndex, 1)
           }, 0)
