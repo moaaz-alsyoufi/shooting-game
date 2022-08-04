@@ -148,8 +148,9 @@ function animate() {
     projectiles.forEach((projectile, projectileIndex) => {
       const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
       if (dist - enemy.radius - projectile.radius < 1) {
-        if (enemy.radius - 10 > 10) {
-          enemy.radius = enemy.radius / 2
+        if (enemy.radius - 10 > 5) {
+          enemy.radius -= 10
+          projectiles.splice(projectileIndex, 1)
         } else {
           setTimeout(() => {
             enemies.splice(enemyIndex, 1)
