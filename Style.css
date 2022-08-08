@@ -28,3 +28,7 @@ body {
   color: #fff;
   z-index: 20;
 }
+
+.score-container span.score {
+  font-size: 1.2rem;
+}

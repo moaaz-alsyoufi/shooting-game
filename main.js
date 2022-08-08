@@ -3,6 +3,8 @@ canvas.width = innerWidth
 canvas.height = innerHeight
 const ctx = canvas.getContext("2d")
 const projectileSound = document.querySelector("audio.projectile-sound")
+const score = document.querySelector(".score-container span.score")
+
 // ctx.fillRect(0, 0, 200, 200)
 // ctx.clearRect(0, 0, 190, 190)
 
@@ -152,10 +154,11 @@ function generateEnemies() {
   const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
 
   enemies.push(new Enemy(x, y, radius, color, velocity))
-  }, 1000)
+  }, 3000)
 }
 
 let animationId
+let scoreCount = 0
 
 function animate() {
   animationId = requestAnimationFrame(animate)
@@ -194,11 +197,16 @@ function animate() {
           setTimeout(() => {
             projectiles.splice(projectileIndex, 1)
           }, 0)
+          scoreCount += 10
+          score.innerHTML = scoreCount
         } else {
           setTimeout(() => {
             enemies.splice(enemyIndex, 1)
             projectiles.splice(projectileIndex, 1)
           }, 0)
+          scoreCount += 25
+          score.innerHTML = scoreCount
+          // localStorage.setItem("score", scoreCount)
         }
       }
     })
