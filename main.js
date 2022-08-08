@@ -147,7 +147,7 @@ function generateEnemies() {
   }
 
   // const y = Math.random() < 0.5 ? Math.random() * canvas.height : 0 - radius
-    const color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`
+  const color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`
   const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x)
   const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
 
@@ -171,7 +171,6 @@ function animate() {
   })
   enemies.forEach((enemy, enemyIndex) => {
     enemy.update()
-    console.log(enemies);
     // End Game
     const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y)
     if (dist - enemy.radius - player.radius < 1) {
@@ -188,7 +187,7 @@ function animate() {
       const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y)
       if (dist - enemy.radius - projectile.radius < 1) {
         for (let i = 0; i < enemy.radius * 2; i++) {
-          particles.push(new Particle(projectile.x, projectile.y, Math.random() * 2, enemy.color, {x: (Math.random() - 0.5) * (Math.random() * 6), y: (Math.random() - 0.5) * (Math.random() * 6)}))
+          particles.push(new Particle(projectile.x, projectile.y, Math.random() * 2, enemy.color, {x: (Math.random() - 0.5) * (Math.random() * 12), y: (Math.random() - 0.5) * (Math.random() * 12)}))
         }
         if (enemy.radius - 10 > 5) {
           gsap.to(enemy, {radius: enemy.radius - 10 })
