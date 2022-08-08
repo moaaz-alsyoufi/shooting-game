@@ -7,7 +7,7 @@
 // 7- colorize game [DONE] --
 // 8- shrink enemies on hit --
 // 9- create projectile explosion on hit --
-// 10- add score
+// 10- add score --
 // 11- add game over UI
 // 12- add restart button
 // 13- add start game button

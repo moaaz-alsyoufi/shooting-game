@@ -154,7 +154,7 @@ function generateEnemies() {
   const velocity = { x: Math.cos(angle), y: Math.sin(angle) }
 
   enemies.push(new Enemy(x, y, radius, color, velocity))
-  }, 3000)
+  }, 1000)
 }
 
 let animationId
