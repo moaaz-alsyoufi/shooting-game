@@ -11,8 +11,12 @@
     <div class="score-container">
       <p>score: <span class="score">0</span></p>
     </div>
+    <div id="gameOverDialog" class="dialog">
+      <h2>Game Over!</h2>
+      <p>Your final score: <span id="finalScore">0</span></p>
+      <button id="restartButton">Play Again!</button>
+    </div>
     <canvas id="canvas" class="canvas" />
-    <audio src="/shoot-sound.mp3" class="projectile-sound" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"
       integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q=="

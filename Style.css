@@ -32,3 +32,25 @@ body {
 .score-container span.score {
   font-size: 1.2rem;
 }
+
+.dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(228, 228, 228);
+  padding: 20px;
+  border: 2px solid black;
+  text-align: center;
+  z-index: 50;
+  border-radius: 8px;
+}
+
+.dialog button {
+  background: black;
+  color: white;
+  border-radius: 8px;
+  padding: 4px 16px;
+  cursor: pointer;
+}
