@@ -2,8 +2,8 @@ const canvas = document.querySelector("canvas#canvas");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 const ctx = canvas.getContext("2d");
-const projectileSound = document.querySelector("audio.projectile-sound");
 const score = document.querySelector(".score-container span.score");
+let play = true; 
 
 
 class Player {
@@ -114,14 +114,10 @@ addEventListener("click", (event) => {
 
   const projectile = new Projectile(x, y, radius, color, velocity);
   projectiles.push(projectile);
-  // TODO::  sound effect stops when player lose
-  if (animationId) {
-    projectileSound.currentTime = 0;
-    projectileSound.play();
-  }
 });
 
 function generateEnemies() {
+  if (play) {
   setInterval(() => {
     let radius = Math.random() * (30 - 4) + 4;
     let x;
@@ -144,11 +140,13 @@ function generateEnemies() {
     enemies.push(new Enemy(x, y, radius, color, velocity));
   }, 1000);
 }
+}
 
 let animationId;
 let scoreCount = 0;
 
 function animate() {
+  if (play) {
   animationId = requestAnimationFrame(animate);
   ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -217,6 +215,7 @@ function animate() {
       }, 0);
     }
   });
+  }
 }
 
 animate();
